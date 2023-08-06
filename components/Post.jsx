@@ -3,23 +3,32 @@ import { Text, View, StyleSheet } from 'react-native';
 
 export default function Post({user, content}) {
     return (
-        <View>
-            <Text>{user}</Text>
-            <View>
-                <Text>{content}</Text>
+        <View style={styles.postContainer}>
+            <Text style={styles.user}>{user}</Text>
+            <View style={styles.contentWrapper}>
+                <Text style={styles.content}>{content}</Text>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    nameText: {
-
+    postContainer: {
+        backgroundColor: '#CB976B',
+        width: 325,
+        borderRadius: 10,
+        padding: 15,
+        marginVertical: 10,
     },
-    contentContainer: {
-
+    user: {
+        color: 'white',
+        fontSize: 18,
     },
-    contentText: {
-        
+    contentWrapper: {
+        marginTop: 10,
+    },
+    content: {
+        color: 'white',
+        fontSize: 16,
     },
 });

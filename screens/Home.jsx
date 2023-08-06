@@ -1,11 +1,13 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, FlatList, Image, ImageBackground, StatusBar } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const imageBG = require('../assets/mainBG.png');
 
+/* 
+    Movie: movieID, movieTitle, movieRating, moviePoster
+*/
+
 export default function Home( {route, navigation} ) {
-    const insets = useSafeAreaInsets();
     const [reviews, setReviews] = React.useState([
         { title: 'The Flash', rating: 3, key: '1', poster: require('../assets/posters/TheFlash.png')},
         { title: 'Spiderman: Across The Spider-verse', rating: 5, key: '2', poster: require('../assets/posters/ATSV.png')},

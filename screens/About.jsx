@@ -1,11 +1,15 @@
 import React from 'react';
-import { Text, View, Button, StyleSheet } from 'react-native';
+import { Text, View, Button, StyleSheet, ImageBackground } from 'react-native';
 import { globalStyles } from '../styles/global';
+
+const imageBG = require('../assets/mainBG.png');
 
 export default function About( {route, navigation} ) {
     return (
-        <View style={globalStyles.container}>
-            <Text style={globalStyles.titleText}>The Review App</Text>
+        <View style={{flex: 1,}}>
+            <ImageBackground source={imageBG} resizeMode='cover' style={{flex: 1}}>
+                
+            </ImageBackground>
         </View>
     )
 }

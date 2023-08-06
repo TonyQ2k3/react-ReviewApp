@@ -1,10 +1,29 @@
-import React from 'react';
-import { Text, View, StyleSheet, Button, Image, StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, StyleSheet, Button, Image, StatusBar, FlatList } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Rating from '../components/Rating';
+import Post from '../components/Post';
+import { app, db, getFirestore, collection, addDoc, getDocs } from '../firebase/index';
+
 
 export default function ReviewDetails( {route, navigation} ) {
-    const { title, rating, poster } = route.params;
+    const { title, rating, poster, key } = route.params;
+    const [reviews, setReviews] = useState([]);
+
+    const getReviews = async() => {
+        const querySnapshot = await getDocs(collection(db, "reviews"));
+        querySnapshot.forEach((doc) => {
+            //console.log(`${doc.id} => ${doc.data().movieID}`);
+            if (doc.data().movieID == key){
+                setReviews( old => [...old, doc.data()]);
+            }
+        });
+    }
+
+    useEffect(() => {
+        getReviews();
+    }, []);
+
     return (
         <View style={globalStyles.container}>
             <StatusBar barStyle="light-content" />
@@ -15,10 +34,15 @@ export default function ReviewDetails( {route, navigation} ) {
                     <Rating value={rating} />
                 </View>
             </View>
-            <View style={styles.reviewContainer}>
-                
-            </View>
-            <Button title='Create a review' onPress={() => navigation.navigate('PostCreate')} />
+            <Text style={{color: '#fff', fontSize: 18, fontFamily: 'nunito-regular', textAlign: 'center', marginBottom: 10,}}>User Reviews</Text>
+            <FlatList 
+                contentContainerStyle={styles.reviewContainer}
+                data={reviews}
+                renderItem={({item}) => (
+                    <Post user={item.reviewUser} content={item.reviewPost} />
+                )}
+            />
+            <Button title='Create a review' onPress={() => navigation.navigate('PostCreate', {movieID: key})} />
         </View>
     )
 }
@@ -43,7 +67,8 @@ const styles = StyleSheet.create({
     },
     reviewContainer: {
         marginVertical: 10,
-        flex: 1,
+        borderColor: '#fff',
+        //flex: 1,
         alignItems: 'center',
     }
 });

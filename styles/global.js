@@ -1,4 +1,4 @@
-import { StyleSheet, ImageBackground } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const globalStyles = StyleSheet.create({
     container: {
@@ -15,5 +15,6 @@ export const globalStyles = StyleSheet.create({
     paragraph: {
         marginVertical: 8,
         lineHeight: 20,
-    }
+    },
+
 });
