@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, FlatList, Image, ImageBackground, StatusBar } from 'react-native';
+import { db, collection, addDoc, getDocs } from '../firebase/index';
 
 const imageBG = require('../assets/mainBG.png');
 
-/* 
-    Movie: movieID, movieTitle, movieRating, moviePoster
-*/
-
 export default function Home( {route, navigation} ) {
-    const [reviews, setReviews] = React.useState([
-        { title: 'The Flash', rating: 3, key: '1', poster: require('../assets/posters/TheFlash.png')},
-        { title: 'Spiderman: Across The Spider-verse', rating: 5, key: '2', poster: require('../assets/posters/ATSV.png')},
-        { title: 'Mission Impossible 7', rating: 4, key: '3', poster: require('../assets/posters/MI7.png')},
-    ]);
+    const [movies, setMovies] = useState([]);
+
+    const getMovies = async() => {
+        const querySnapshot = await getDocs(collection(db, "movies"));
+        querySnapshot.forEach((doc) => {
+            setMovies(old => [...old, {...doc.data()}]);
+        });
+    }
+
+    useEffect(() => {
+        getMovies();
+    }, [])
 
     return (
         <View style={styles.homeContainer}>
@@ -20,11 +24,12 @@ export default function Home( {route, navigation} ) {
             <ImageBackground source={imageBG} resizeMode='cover' style={styles.imageBG}>
                 <FlatList
                     contentContainerStyle={styles.listContainer} 
-                    data={reviews}
+                    data={movies}
+                    keyExtractor={(item) => item.movieID}
                     renderItem={({item}) => (
                         <TouchableOpacity style={styles.movieContainer} onPress={() => navigation.navigate('Details', item)}>
-                            <Image source={item.poster} style={styles.moviePoster} />
-                            <Text style={styles.movieTitle}>{item.title}</Text>
+                            <Image source={{uri: item.moviePoster}} style={styles.moviePoster} />
+                            <Text style={styles.movieTitle}>{item.movieTitle}</Text>
                         </TouchableOpacity>
                     )} 
                 />

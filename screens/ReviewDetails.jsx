@@ -7,14 +7,13 @@ import { app, db, getFirestore, collection, addDoc, getDocs } from '../firebase/
 
 
 export default function ReviewDetails( {route, navigation} ) {
-    const { title, rating, poster, key } = route.params;
+    const { movieTitle, movieRating, moviePoster, movieID } = route.params;
     const [reviews, setReviews] = useState([]);
 
     const getReviews = async() => {
         const querySnapshot = await getDocs(collection(db, "reviews"));
         querySnapshot.forEach((doc) => {
-            //console.log(`${doc.id} => ${doc.data().movieID}`);
-            if (doc.data().movieID == key){
+            if (doc.data().movieID == movieID){
                 setReviews( old => [...old, doc.data()]);
             }
         });
@@ -28,10 +27,10 @@ export default function ReviewDetails( {route, navigation} ) {
         <View style={globalStyles.container}>
             <StatusBar barStyle="light-content" />
             <View style={styles.posterContainer}>
-                <Image source={poster} style={styles.posterImage} />
+                <Image source={{uri: moviePoster}} style={styles.posterImage} />
                 <View style={styles.titleContainer}>
-                    <Text style={globalStyles.titleText}>{title}</Text>
-                    <Rating value={rating} />
+                    <Text style={globalStyles.titleText}>{movieTitle}</Text>
+                    <Rating value={movieRating} />
                 </View>
             </View>
             <Text style={{color: '#fff', fontSize: 18, fontFamily: 'nunito-regular', textAlign: 'center', marginBottom: 10,}}>User Reviews</Text>
@@ -42,7 +41,7 @@ export default function ReviewDetails( {route, navigation} ) {
                     <Post user={item.reviewUser} content={item.reviewPost} />
                 )}
             />
-            <Button title='Create a review' onPress={() => navigation.navigate('PostCreate', {movieID: key})} />
+            <Button title='Create a review' onPress={() => navigation.navigate('PostCreate', {movieID: movieID})} />
         </View>
     )
 }
