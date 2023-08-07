@@ -2,15 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, FlatList, Image, ImageBackground, StatusBar } from 'react-native';
 import { db, collection, addDoc, getDocs } from '../firebase/index';
 
-const imageBG = require('../assets/mainBG.png');
+const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/mainBG.png?alt=media&token=0a595a6d-e09d-424d-8ecd-4f45610477e0';
 
 export default function Home( {route, navigation} ) {
     const [movies, setMovies] = useState([]);
-
+    const [IDs, setIDs] = useState([]);
     const getMovies = async() => {
         const querySnapshot = await getDocs(collection(db, "movies"));
         querySnapshot.forEach((doc) => {
-            setMovies(old => [...old, {...doc.data()}]);
+            if (IDs.indexOf(doc.data().movieID) === -1) {
+                setMovies(old => [...old, {
+                    movieID: doc.data().movieID,
+                    movieTitle: doc.data().movieTitle,
+                    moviePoster: doc.data().moviePoster,
+                    movieRating: doc.data().movieRating }
+                ]);
+                setIDs(old => [...old, doc.data().movieID]);
+            }
         });
     }
 
@@ -21,7 +29,7 @@ export default function Home( {route, navigation} ) {
     return (
         <View style={styles.homeContainer}>
             <StatusBar barStyle="light-content" />
-            <ImageBackground source={imageBG} resizeMode='cover' style={styles.imageBG}>
+            <ImageBackground source={{uri: imageBG}} resizeMode='cover' style={styles.imageBG}>
                 <FlatList
                     contentContainerStyle={styles.listContainer} 
                     data={movies}
