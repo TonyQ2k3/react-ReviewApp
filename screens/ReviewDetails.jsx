@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Button, Image, StatusBar, FlatList } from 'reac
 import { globalStyles } from '../styles/global';
 import Rating from '../components/Rating';
 import Post from '../components/Post';
-import { app, db, getFirestore, collection, addDoc, getDocs } from '../firebase/index';
+import { db, collection, getDocs } from '../firebase/index';
 
 
 export default function ReviewDetails( {route, navigation} ) {
@@ -12,11 +12,15 @@ export default function ReviewDetails( {route, navigation} ) {
 
     const getReviews = async() => {
         const querySnapshot = await getDocs(collection(db, "reviews"));
-        querySnapshot.forEach((doc) => {
-            if (doc.data().movieID == movieID){
-                setReviews( old => [...old, doc.data()]);
-            }
-        });
+        try {
+            querySnapshot.forEach((doc) => {
+                if (doc.data().movieID == movieID){
+                    setReviews( old => [...old, doc.data()]);
+                }
+            });
+        } catch (e) {
+            console.error("Error fetching data: ", e);
+        }
     }
 
     useEffect(() => {
