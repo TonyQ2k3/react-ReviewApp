@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Button, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet, Button, TextInput, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
-import { app, db, getFirestore, collection, addDoc } from '../firebase/index';
+import { db, collection, addDoc } from '../firebase/index';
 
 
 export default function PostCreate( {route, navigation} ) {
     const { movieID } = route.params;
-    const [review, setReview] = useState({});
 
     const addReview = async(myValues) => {
         try {
             const docRef = await addDoc(collection(db, "reviews"), {
-              movieID: movieID,
-              reviewUser: myValues.user,
-              reviewPost: myValues.post
+                movieID: movieID,
+                reviewUser: myValues.user,
+                reviewPost: myValues.post
             });
             console.log("Review added written with ID: ", docRef.id);
+            Alert.alert('Review added successfully!');
+            navigation.goBack();
           } catch (e) {
-            console.error("Error adding document: ", e);
+            console.error("Error adding review: ", e);
           }
     }
 
@@ -28,13 +29,13 @@ export default function PostCreate( {route, navigation} ) {
                 <Formik
                     initialValues={{user: '', post: ''}}
                     onSubmit={(values) => {
-                        //setReview(old => values);
                         addReview(values);
                     }}
                 >
-                { ({ handleChange, handleSubmit, values}) => (
+                { 
+                    ({handleChange, handleSubmit, values}) => (
                     <View>
-                         <View style={styles.nameContainer}>
+                        <View style={styles.nameContainer}>
                             <Text style={{fontSize: 16, color: '#fff'}}>Your name: </Text>
                             <TextInput 
                                 style={styles.nameInput}
@@ -49,8 +50,7 @@ export default function PostCreate( {route, navigation} ) {
                             onChangeText={handleChange('post')}
                             />
                         <Button title='Submit' onPress={handleSubmit} />
-                    </View>
-                    ) 
+                    </View>) 
                 }
             </Formik>
             </View>
