@@ -14,7 +14,7 @@ export default function Post({user, content}) {
 
 const styles = StyleSheet.create({
     postContainer: {
-        backgroundColor: '#CB976B',
+        backgroundColor: '#F34C56',
         width: 325,
         borderRadius: 10,
         padding: 15,

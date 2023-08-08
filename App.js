@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Appearance } from 'react-native';
+import { StyleSheet, Appearance, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,6 +10,7 @@ import About from './screens/About';
 import ReviewDetails from './screens/ReviewDetails';
 import PostCreate from './screens/PostCreate';
 import InfoButton from './components/InfoButton';
+import HeaderBG from './components/HeaderBG';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,11 +41,11 @@ export default function App() {
         <Stack.Screen name="Home" 
           component={Home}
           options={ ({ route, navigation }) => ({
-            title: '🎬 The Review App',
-            headerStyle: styles.headerStyle,
+            title: '🎞️ FlixReview',
             headerTitleStyle: styles.appTitle,
             headerTitleAlign: 'center',
-            headerRight: () => (<InfoButton func={() => navigation.navigate('About')} />)
+            headerRight: () => (<InfoButton func={() => navigation.navigate('About')} />),
+            headerBackground: (() => <HeaderBG />)
           }) }
          />
         <Stack.Screen name='About'
@@ -74,10 +75,10 @@ export default function App() {
 
 const styles = StyleSheet.create({
   headerStyle: {
-    backgroundColor:  Appearance.getColorScheme() === 'dark' ? '#fff' : '#000', 
+    backgroundColor:  Appearance.getColorScheme() === 'dark' ? '#fff' : '#D94848', 
   },
   appTitle: {
-    color: '#CB976B', 
+    color: '#fff', 
     fontSize: 26, 
     fontFamily: 'playfair-medium',
   },

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, FlatList, Image, ImageBackground, StatusBar } from 'react-native';
-import { db, collection, addDoc, getDocs } from '../firebase/index';
+import { db, collection, getDocs } from '../firebase/index';
 
-const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/mainBG.png?alt=media&token=0a595a6d-e09d-424d-8ecd-4f45610477e0';
+const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_red.png?alt=media&token=795acc62-ec26-4828-911c-e70a0dcc64c5';
 
 export default function Home( {route, navigation} ) {
     const [movies, setMovies] = useState([]);
