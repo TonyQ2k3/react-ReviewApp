@@ -52,6 +52,7 @@ export default function App() {
           component={About}
           options={{
             headerTitleStyle: styles.otherScreenTitle,
+            headerTitleAlign: 'center',
             animation: 'fade',
             headerBackground: (() => <HeaderBG />)
           }} />
@@ -85,5 +86,6 @@ const styles = StyleSheet.create({
   },
   otherScreenTitle: {
     color: Appearance.getColorScheme() === 'dark' ? '#000' : '#fff',
+    fontSize: 22,
   }
 });
