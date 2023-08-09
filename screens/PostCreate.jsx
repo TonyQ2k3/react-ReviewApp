@@ -1,9 +1,10 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, TextInput, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { Text, View, StyleSheet, Button, TextInput, TouchableWithoutFeedback, Keyboard, Alert, ImageBackground } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
 import { db, collection, addDoc } from '../firebase/index';
 
+const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
 
 export default function PostCreate( {route, navigation} ) {
     const { movieID } = route.params;
@@ -34,7 +35,7 @@ export default function PostCreate( {route, navigation} ) {
                 >
                 { 
                     ({handleChange, handleSubmit, values}) => (
-                    <View>
+                    <ImageBackground source={{uri: imageBG}} resizeMode='cover' style={{flex: 1, padding: 20}}>
                         <View style={styles.nameContainer}>
                             <Text style={{fontSize: 16, color: '#fff'}}>Your name: </Text>
                             <TextInput 
@@ -50,7 +51,7 @@ export default function PostCreate( {route, navigation} ) {
                             onChangeText={handleChange('post')}
                             />
                         <Button title='Submit' onPress={handleSubmit} />
-                    </View>) 
+                    </ImageBackground>) 
                 }
             </Formik>
             </View>
