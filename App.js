@@ -51,15 +51,16 @@ export default function App() {
         <Stack.Screen name='About'
           component={About}
           options={{
-            headerStyle: styles.headerStyle,
             headerTitleStyle: styles.otherScreenTitle,
-            animation: 'slide_from_bottom',
+            animation: 'fade',
+            headerBackground: (() => <HeaderBG />)
           }} />
         <Stack.Screen name='Details'
           component={ReviewDetails}
           options={{
             headerStyle: styles.headerStyle,
             headerTitleStyle: styles.otherScreenTitle,
+            animation: 'slide_from_right',
           }} />
         <Stack.Screen name='PostCreate'
           component={PostCreate} 
