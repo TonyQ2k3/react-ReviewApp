@@ -37,15 +37,15 @@ export default function PostCreate( {route, navigation} ) {
                     ({handleChange, handleSubmit, values}) => (
                     <ImageBackground source={{uri: imageBG}} resizeMode='cover' style={{flex: 1, padding: 20}}>
                         <View style={styles.nameContainer}>
-                            <Text style={{fontSize: 16, color: '#fff'}}>Your name: </Text>
+                            <Text style={{fontSize: 18, color: '#fff'}}>Your name: </Text>
                             <TextInput 
                                 style={styles.nameInput}
                                 value={values.user}
                                 onChangeText={handleChange('user')} />
                         </View>
-                        <Text style={{fontSize: 16, color: '#fff'}}>Your review: </Text>
+                        <Text style={{fontSize: 18, color: '#fff'}}>Your review: </Text>
                         <TextInput 
-                            multiline 
+                            multiline
                             style={styles.postInput}
                             value={values.post}
                             onChangeText={handleChange('post')}
@@ -65,16 +65,21 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     nameInput: {
-        backgroundColor: 'white',
+        color: '#fff',
         height: 30,
-        width: 200,
+        width: 225,
         paddingLeft: 10,
+        borderBottomColor: '#fff',
+        borderBottomWidth: 2,
     },
     postInput: {
-        marginVertical: 20,
-        backgroundColor: 'white',
-        height: 300,
+        color: '#fff',
+        marginVertical: 10,
+        fontSize: 16,
+        maxHeight: 300,
         padding: 10,
-        justifyContent: 'flex-start',
+        borderRadius: 5,
+        borderBottomColor: '#fff',
+        borderBottomWidth: 2,
     }
 });
