@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 //import { FontAwesomeIcon } from '@expo/vector-icons';
 
-export default function Rating({ value }) {
+export default function Rating({ value, withText = true }) {
     let result = '';
     for (let i = 0; i < Math.round(value); i++) {
         result += '★';
@@ -11,6 +11,9 @@ export default function Rating({ value }) {
         result += '☆';
     }
     return (
-        <Text style={{fontSize: 18, textAlign: 'center', color: '#fff'}}>Rating: {result}</Text>
+        <Text style={{fontSize: 18, textAlign: 'center', color: '#fff'}}>
+            {withText ? "Rating: " + result : result}
+        </Text>
     )
 }
+
