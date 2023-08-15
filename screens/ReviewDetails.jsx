@@ -9,7 +9,7 @@ const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.a
 
 export default function ReviewDetails( {route, navigation} ) {
     const { movieTitle, movieRating, moviePoster, movieID } = route.params;
-    const [ rating, setRating] = useState(movieRating);
+    const [rating, setRating] = useState(movieRating);
     const [reviews, setReviews] = useState([]);
     const [IDs, setIDs] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
@@ -57,7 +57,7 @@ export default function ReviewDetails( {route, navigation} ) {
                         <Rating value={rating} />
                     </View>
                 </View>
-                <Text style={{color: '#fff', fontSize: 18, fontFamily: 'nunito-regular', textAlign: 'center', marginBottom: 10,}}>User Reviews</Text>
+                <Text style={styles.userReviewText}>User Reviews [{reviews.length}]</Text>
                 <FlatList 
                     contentContainerStyle={styles.reviewContainer}
                     data={reviews}
@@ -91,6 +91,13 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         flex: 2,
+    },
+    userReviewText: {
+        color: '#fff', 
+        fontSize: 18, 
+        fontFamily: 'nunito-regular', 
+        textAlign: 'center', 
+        marginBottom: 10,
     },
     reviewText: {
         fontSize: 16,
