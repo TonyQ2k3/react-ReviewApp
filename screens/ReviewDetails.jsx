@@ -80,12 +80,11 @@ const styles = StyleSheet.create({
     posterContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginHorizontal: 20,
-        marginTop: 20,
+        margin: 20,
     },
     posterImage: {
         width: 100, 
-        height: 125, 
+        height: 130, 
         marginRight: 5,
         borderRadius: 10,
     },
