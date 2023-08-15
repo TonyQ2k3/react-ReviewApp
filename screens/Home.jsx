@@ -12,7 +12,7 @@ export default function Home( {route, navigation} ) {
         querySnapshot.forEach((doc) => {
             if (IDs.indexOf(doc.data().movieID) === -1) {
                 setMovies(old => [...old, {
-                    movieID: doc.data().movieID,
+                    movieID: doc.id,
                     movieTitle: doc.data().movieTitle,
                     moviePoster: doc.data().moviePoster,
                     movieRating: doc.data().movieRating }
