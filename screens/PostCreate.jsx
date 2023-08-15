@@ -65,7 +65,7 @@ export default function PostCreate( {route, navigation} ) {
                         <View style={styles.ratingContainer}>
                             <AirbnbRating
                             count={5}
-                            reviews={["Terrible", "Meh", "Good", "Very Good", "Amazing"]}
+                            reviews={["Terrible", "Bad", "Good", "Very Good", "Amazing"]}
                             selectedColor='#fff'
                             defaultRating={3}
                             size={20}
