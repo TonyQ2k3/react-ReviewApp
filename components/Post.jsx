@@ -1,10 +1,14 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import Rating from './Rating';
 
-export default function Post({user, content}) {
+export default function Post({user, content, rating = 0}) {
     return (
         <View style={styles.postContainer}>
-            <Text style={styles.user}>{user}</Text>
+            <View style={styles.postHeader}>
+                <Text style={styles.user}>{user}</Text>
+                <Rating value={rating} withText={false} />
+            </View>
             <View style={styles.contentWrapper}>
                 <Text style={styles.content}>{content}</Text>
             </View>
@@ -20,9 +24,14 @@ const styles = StyleSheet.create({
         padding: 15,
         marginVertical: 10,
     },
+    postHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
     user: {
         color: 'white',
         fontSize: 18,
+        maxWidth: '50%',
     },
     contentWrapper: {
         marginTop: 10,
