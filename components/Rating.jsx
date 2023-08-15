@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text } from 'react-native';
-//import { FontAwesomeIcon } from '@expo/vector-icons';
 
 export default function Rating({ value, withText = true }) {
     let result = '';
