@@ -2,14 +2,24 @@ import React, { useState } from 'react';
 import { Text, View, StyleSheet, Button, TextInput, TouchableWithoutFeedback, Keyboard, Alert, ImageBackground } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
-import { db, collection, addDoc } from '../firebase/index';
+import { db, collection, addDoc, setDoc, doc, getDoc } from '../firebase/index';
 import { AirbnbRating } from 'react-native-ratings';
 
 const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
 
 export default function PostCreate( {route, navigation} ) {
-    const { movieID } = route.params;
+    const { movieID, revNum } = route.params;
     const [rating, setRating] = useState(3);
+
+    const updateRating = async() => {
+        const docRef = doc(db, "movies", movieID);
+        const docSnap = await getDoc(docRef);
+        const oldRating = docSnap.data().movieRating;
+
+        setDoc(docRef, { 
+            movieRating: parseInt((rating + oldRating) / (revNum + 1)),
+        }, { merge: true });
+    }
 
     const addReview = async(myValues) => {
         try {
@@ -21,6 +31,9 @@ export default function PostCreate( {route, navigation} ) {
             });
             console.log("Review added written with ID: ", docRef.id);
             Alert.alert('Review added successfully!');
+            // Update movie rating
+            updateRating();
+
             navigation.goBack();
           } catch (e) {
             console.error("Error adding review: ", e);
