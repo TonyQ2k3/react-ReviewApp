@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     },
     moviePoster: {
         width: 200,
-        height: 250,
+        height: 305,
         borderRadius: 10,
     },
     movieTitle: {
