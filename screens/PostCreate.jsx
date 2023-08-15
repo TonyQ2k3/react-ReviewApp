@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, Button, TextInput, TouchableWithoutFeedback, Keyboard, Alert, ImageBackground } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
 import { db, collection, addDoc } from '../firebase/index';
+import { AirbnbRating } from 'react-native-ratings';
 
 const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
 
 export default function PostCreate( {route, navigation} ) {
     const { movieID } = route.params;
+    const [rating, setRating] = useState(3);
 
     const addReview = async(myValues) => {
         try {
             const docRef = await addDoc(collection(db, "reviews"), {
                 movieID: movieID,
                 reviewUser: myValues.user,
-                reviewPost: myValues.post
+                reviewPost: myValues.post,
+                reviewRating: rating,
             });
             console.log("Review added written with ID: ", docRef.id);
             Alert.alert('Review added successfully!');
@@ -36,6 +39,7 @@ export default function PostCreate( {route, navigation} ) {
                 { 
                     ({handleChange, handleSubmit, values}) => (
                     <ImageBackground source={{uri: imageBG}} resizeMode='cover' style={{flex: 1, padding: 20}}>
+                        {/* Name Input */}
                         <View style={styles.nameContainer}>
                             <Text style={{fontSize: 18, color: '#fff'}}>Your name: </Text>
                             <TextInput 
@@ -43,6 +47,20 @@ export default function PostCreate( {route, navigation} ) {
                                 value={values.user}
                                 onChangeText={handleChange('user')} />
                         </View>
+
+                        {/* Rating Input */}
+                        <View style={styles.ratingContainer}>
+                            <AirbnbRating
+                            count={5}
+                            reviews={["Terrible", "Meh", "Good", "Very Good", "Amazing"]}
+                            selectedColor='#fff'
+                            defaultRating={3}
+                            size={20}
+                            onFinishRating={(val) => setRating(val)}
+                            />
+                        </View>
+
+                        {/* Review Input */}
                         <Text style={{fontSize: 18, color: '#fff'}}>Your review: </Text>
                         <TextInput 
                             multiline
@@ -53,7 +71,7 @@ export default function PostCreate( {route, navigation} ) {
                         <Button title='Submit' onPress={handleSubmit} />
                     </ImageBackground>) 
                 }
-            </Formik>
+                </Formik>
             </View>
         </TouchableWithoutFeedback>
     )
@@ -71,6 +89,11 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         borderBottomColor: '#fff',
         borderBottomWidth: 2,
+    },
+    ratingContainer: {
+        marginVertical: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
     postInput: {
         color: '#fff',
