@@ -18,7 +18,7 @@ export default function ReviewDetails( {route, navigation} ) {
         const querySnapshot = await getDocs(collection(db, "reviews"));
         try {
             querySnapshot.forEach((doc) => {
-                if (doc.data().movieID == movieID && IDs.indexOf(doc.id) == -1){
+                if (doc.data().movieID == movieID && IDs.indexOf(doc.id) === -1) {
                     setReviews( old => [...old, doc.data()]);
                     setIDs(old => [...old, doc.id]);
                 }
@@ -39,12 +39,12 @@ export default function ReviewDetails( {route, navigation} ) {
 
     // For refresh control
 
-    const onRefresh = async () => {
+    const onRefresh = async() => {
         setRefreshing(true);
         await getReviews();
         await updateRating();
         setRefreshing(false);
-      };
+    };
 
     return (
         <View style={globalStyles.container}>
@@ -68,7 +68,7 @@ export default function ReviewDetails( {route, navigation} ) {
                         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor='white' color='white' />
                     }
                 />
-                <View style={{paddingHorizontal: 50,}}>
+                <View style={{paddingHorizontal: 50, marginTop: 10,}}>
                     <Button title='Create a review' onPress={() => navigation.navigate('PostCreate', {movieID: movieID, revNum: reviews.length})} />
                 </View>
             </ImageBackground>
@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
     },
     reviewContainer: {
         marginVertical: 10,
-        borderColor: '#fff',
         alignItems: 'center',
     }
 });
