@@ -67,8 +67,10 @@ export default function PostCreate( {route, navigation} ) {
                             count={5}
                             reviews={["Terrible", "Bad", "Good", "Very Good", "Amazing"]}
                             selectedColor='#fff'
+                            unSelectedColor='#3f3f3f'
                             defaultRating={3}
                             size={20}
+                            reviewColor='#fff'
                             onFinishRating={(val) => setRating(val)}
                             />
                         </View>
