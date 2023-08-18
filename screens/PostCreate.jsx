@@ -4,8 +4,20 @@ import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
 import { db, collection, addDoc, setDoc, doc, getDoc } from '../firebase/index';
 import { AirbnbRating } from 'react-native-ratings';
+import * as yup from 'yup';
 
 const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
+
+const reviewSchema = yup.object({
+    user: yup.string()
+    .label('Username')
+    .required()
+    .min(5),
+    post: yup.string()
+    .label('Review article')
+    .required()
+    .min(5),
+});
 
 export default function PostCreate( {route, navigation} ) {
     const { movieID, revNum } = route.params;
@@ -45,20 +57,24 @@ export default function PostCreate( {route, navigation} ) {
             <View style={globalStyles.container}>
                 <Formik
                     initialValues={{user: '', post: ''}}
+                    validationSchema={reviewSchema}
                     onSubmit={(values) => {
                         addReview(values);
                     }}
                 >
                 { 
-                    ({handleChange, handleSubmit, values}) => (
+                    ({handleChange, handleSubmit, values, errors}) => (
                     <ImageBackground source={{uri: imageBG}} resizeMode='cover' style={{flex: 1, padding: 20}}>
                         {/* Name Input */}
                         <View style={styles.nameContainer}>
                             <Text style={{fontSize: 18, color: '#fff'}}>Your name: </Text>
-                            <TextInput 
-                                style={styles.nameInput}
-                                value={values.user}
-                                onChangeText={handleChange('user')} />
+                            <View style={{marginRight: 10}}>
+                                <TextInput 
+                                    style={styles.nameInput}
+                                    value={values.user}
+                                    onChangeText={handleChange('user')} />
+                                <Text style={styles.errorText}>{errors.user}</Text>
+                            </View>
                         </View>
 
                         {/* Rating Input */}
@@ -76,13 +92,16 @@ export default function PostCreate( {route, navigation} ) {
                         </View>
 
                         {/* Review Input */}
-                        <Text style={{fontSize: 18, color: '#fff'}}>Your review: </Text>
-                        <TextInput 
-                            multiline
-                            style={styles.postInput}
-                            value={values.post}
-                            onChangeText={handleChange('post')}
-                            />
+                        <View style={{marginBottom: 10,}}>
+                            <Text style={{fontSize: 18, color: '#fff'}}>Your review: </Text>
+                            <TextInput 
+                                multiline
+                                style={styles.postInput}
+                                value={values.post}
+                                onChangeText={handleChange('post')}
+                                />
+                            <Text style={styles.errorText}>{errors.post}</Text>
+                        </View>
                         <Button title='Submit' onPress={handleSubmit} />
                     </ImageBackground>) 
                 }
@@ -100,7 +119,7 @@ const styles = StyleSheet.create({
     nameInput: {
         color: '#fff',
         height: 30,
-        width: 225,
+        width: 250,
         paddingLeft: 10,
         borderBottomColor: '#fff',
         borderBottomWidth: 2,
@@ -119,5 +138,9 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderBottomColor: '#fff',
         borderBottomWidth: 2,
-    }
+    },
+    errorText: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
 });
