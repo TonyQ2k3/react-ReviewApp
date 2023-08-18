@@ -68,7 +68,7 @@ export default function ReviewDetails( {route, navigation} ) {
                         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor='white' color='white' />
                     }
                 />
-                <View style={{paddingHorizontal: 50, marginTop: 10,}}>
+                <View style={{paddingHorizontal: 40, marginTop: 10,}}>
                     <Button title='Create a review' onPress={() => navigation.navigate('PostCreate', {movieID: movieID, revNum: reviews.length})} />
                 </View>
             </ImageBackground>
