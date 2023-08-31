@@ -11,6 +11,7 @@ import About from './screens/About';
 import ReviewDetails from './screens/ReviewDetails';
 import PostCreate from './screens/PostCreate';
 import Login from './screens/Login';
+import Signup from './screens/Signup';
 
 // Import components
 import InfoButton from './components/InfoButton';
@@ -41,7 +42,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator initialRouteName='Signup'>
         <Stack.Screen name="Home" 
           component={Home}
           options={ ({ route, navigation }) => ({
@@ -76,6 +77,14 @@ export default function App() {
           }} />
         <Stack.Screen name='Login'
           component={Login}
+          options={{
+            title: '',
+            headerStyle: styles.headerStyle,
+            headerTitleStyle: styles.otherScreenTitle,
+          }}
+        />
+        <Stack.Screen name='Signup'
+          component={Signup}
           options={{
             title: '',
             headerStyle: styles.headerStyle,
