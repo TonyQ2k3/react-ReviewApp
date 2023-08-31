@@ -1,14 +1,18 @@
-import { useEffect, useState } from 'react';
-import { StyleSheet, Appearance, Image } from 'react-native';
+import { useEffect } from 'react';
+import { StyleSheet, Appearance } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// Import screens
 import Home from './screens/Home';
 import About from './screens/About';
 import ReviewDetails from './screens/ReviewDetails';
 import PostCreate from './screens/PostCreate';
+import Login from './screens/Login';
+
+// Import components
 import InfoButton from './components/InfoButton';
 import HeaderBG from './components/HeaderBG';
 
@@ -37,7 +41,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
+      <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen name="Home" 
           component={Home}
           options={ ({ route, navigation }) => ({
@@ -70,6 +74,14 @@ export default function App() {
             headerStyle: styles.headerStyle,
             headerTitleStyle: styles.otherScreenTitle,
           }} />
+        <Stack.Screen name='Login'
+          component={Login}
+          options={{
+            title: '',
+            headerStyle: styles.headerStyle,
+            headerTitleStyle: styles.otherScreenTitle,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
