@@ -16,6 +16,7 @@ import Signup from './screens/Signup';
 // Import components
 import InfoButton from './components/InfoButton';
 import HeaderBG from './components/HeaderBG';
+import Profile from './screens/Profile';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -42,14 +43,15 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Signup'>
+      <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen name="Home" 
           component={Home}
           options={ ({ route, navigation }) => ({
             title: '🎞️ FlixReview',
             headerTitleStyle: styles.appTitle,
             headerTitleAlign: 'center',
-            headerRight: () => (<InfoButton func={() => navigation.navigate('About')} />),
+            headerRight: () => (<InfoButton type='infocirlceo' func={() => navigation.navigate('About')} />),
+            headerLeft: () => (<InfoButton type='user' func={() => navigation.navigate('Profile')} />),
             headerBackground: (() => <HeaderBG />)
           }) }
          />
@@ -87,6 +89,14 @@ export default function App() {
           component={Signup}
           options={{
             title: '',
+            headerStyle: styles.headerStyle,
+            headerTitleStyle: styles.otherScreenTitle,
+          }}
+        />
+        <Stack.Screen name='Profile'
+          component={Profile}
+          options={{
+            title: 'Your Profile',
             headerStyle: styles.headerStyle,
             headerTitleStyle: styles.otherScreenTitle,
           }}
