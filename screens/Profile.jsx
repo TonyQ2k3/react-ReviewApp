@@ -32,6 +32,7 @@ export default function Profile({route, navigation}) {
                     <View>
                         <Image source={require('../assets/anon_user.png')} style={styles.userAvatar} />
                         <Text style={styles.userTitle}>{user.displayName}</Text>
+                        <Text style={styles.userEmail}>{user.email}</Text>
                     </View>
                     <TouchableOpacity style={globalStyles.submitBtn} onPress={handleSignOut}>
                         <Text style={{color: '#fff', fontSize: 20,}}>Sign out</Text>
@@ -62,8 +63,14 @@ const styles = StyleSheet.create({
     },
     userTitle: {
         color: '#fff',
-        fontSize: 25,
+        fontSize: 26,
         fontFamily: 'nunito-bold',
+        textAlign: 'center',
+    },
+    userEmail: {
+        color: '#fff',
+        fontSize: 18,
+        fontFamily: 'nunito-regular',
         textAlign: 'center',
     },
     userAvatar: {
