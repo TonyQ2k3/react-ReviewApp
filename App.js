@@ -25,6 +25,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const [fontsLoaded] = useFonts({
     'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
+    'nunito-bold': require('./assets/fonts/Nunito-Bold.ttf'),
     'playfair-regular': require('./assets/fonts/PlayfairDisplay-Regular.ttf'),
     'playfair-medium': require('./assets/fonts/PlayfairDisplay-Medium.ttf'),
   });
