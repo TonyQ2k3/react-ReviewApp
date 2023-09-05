@@ -19,5 +19,12 @@ export const globalStyles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
     },
-
+    submitBtn: {
+        margin: 20,
+        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#D94848',
+        borderRadius: 25,
+    },
 });
