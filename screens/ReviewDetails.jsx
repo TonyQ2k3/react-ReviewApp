@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, Button, Image, StatusBar, FlatList, RefreshControl, ImageBackground } from 'react-native';
+import { Text, View, StyleSheet, Button, Image, StatusBar, FlatList, RefreshControl, ImageBackground, Alert } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Rating from '../components/Rating';
 import Post from '../components/Post';
-import { db, collection, getDocs, getDoc, doc } from '../firebase/index';
+import { db, collection, getDocs, getDoc, doc, auth } from '../firebase/index';
 
 const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
 
@@ -31,6 +31,19 @@ export default function ReviewDetails( {route, navigation} ) {
     const updateRating = async() => {
         const docSnap = await getDoc(doc(db, "movies", movieID));
         setRating(docSnap.data().movieRating);
+    }
+
+    const handlePostCreate = () => {
+        const user = auth.currentUser;
+        if (user !== null) {
+            navigation.navigate('PostCreate', {movieID: movieID, 
+                revNum: reviews.length, 
+                userName: user.displayName
+            });
+        }
+        else {
+            Alert.alert('Please sign in to create a review post.');
+        }
     }
 
     useEffect(() => {
@@ -69,7 +82,7 @@ export default function ReviewDetails( {route, navigation} ) {
                     }
                 />
                 <View style={{paddingHorizontal: 40, marginTop: 10,}}>
-                    <Button title='Create a review' onPress={() => navigation.navigate('PostCreate', {movieID: movieID, revNum: reviews.length})} />
+                    <Button title='Create a review' onPress={handlePostCreate} />
                 </View>
             </ImageBackground>
         </View>
