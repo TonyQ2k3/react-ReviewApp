@@ -5,6 +5,11 @@ export const globalStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#000000',
     },
+    containerPrompt: {
+        flex: 1,
+        backgroundColor: '#000000',
+        justifyContent: 'space-between',
+    },
     titleText: {
         fontSize: 20,
         color: '#fff',   
@@ -20,6 +25,7 @@ export const globalStyles = StyleSheet.create({
         fontSize: 18,
     },
     submitBtn: {
+        minWidth: 200,
         margin: 20,
         padding: 10,
         justifyContent: 'center',
