@@ -9,10 +9,6 @@ import * as yup from 'yup';
 const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
 
 const reviewSchema = yup.object({
-    user: yup.string()
-    .label('Username')
-    .required()
-    .min(5),
     post: yup.string()
     .label('Review article')
     .required()
@@ -20,7 +16,7 @@ const reviewSchema = yup.object({
 });
 
 export default function PostCreate( {route, navigation} ) {
-    const { movieID, revNum } = route.params;
+    const { movieID, revNum, userName } = route.params;
     const [rating, setRating] = useState(3);
 
     const updateRating = async() => {
@@ -37,7 +33,7 @@ export default function PostCreate( {route, navigation} ) {
         try {
             const docRef = await addDoc(collection(db, "reviews"), {
                 movieID: movieID,
-                reviewUser: myValues.user,
+                reviewUser: userName,
                 reviewPost: myValues.post,
                 reviewRating: rating,
             });
@@ -56,7 +52,7 @@ export default function PostCreate( {route, navigation} ) {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={globalStyles.container}>
                 <Formik
-                    initialValues={{user: '', post: ''}}
+                    initialValues={{post: ''}}
                     validationSchema={reviewSchema}
                     onSubmit={(values) => {
                         addReview(values);
@@ -65,18 +61,6 @@ export default function PostCreate( {route, navigation} ) {
                 { 
                     ({handleChange, handleSubmit, values, errors}) => (
                     <ImageBackground source={{uri: imageBG}} resizeMode='cover' style={{flex: 1, padding: 20}}>
-                        {/* Name Input */}
-                        <View style={styles.nameContainer}>
-                            <Text style={{fontSize: 18, color: '#fff'}}>Your name: </Text>
-                            <View style={{marginRight: 10}}>
-                                <TextInput 
-                                    style={styles.nameInput}
-                                    value={values.user}
-                                    onChangeText={handleChange('user')} />
-                                <Text style={styles.errorText}>{errors.user}</Text>
-                            </View>
-                        </View>
-
                         {/* Rating Input */}
                         <View style={styles.ratingContainer}>
                             <AirbnbRating
