@@ -61,7 +61,6 @@ export default function App() {
           options={{
             headerTitleStyle: styles.otherScreenTitle,
             headerTitleAlign: 'center',
-            animation: 'fade',
             headerBackground: (() => <HeaderBG />)
           }} />
         <Stack.Screen name='Details'
