@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, FlatList, Image, ImageBackground, StatusBar, RefreshControl } from 'react-native';
-import { db, collection, getDocs } from '../firebase/index';
+import { db, collection, getDocs, auth } from '../firebase/index';
 
 const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_red.png?alt=media&token=795acc62-ec26-4828-911c-e70a0dcc64c5';
 
-export default function Home( {route, navigation} ) {
+export default function Home( {navigation} ) {
     const [refreshing, setRefreshing] = useState(false);
     const [movies, setMovies] = useState([]);
     const [IDs, setIDs] = useState([]);
