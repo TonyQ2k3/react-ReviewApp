@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, ImageBackground } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
-import { auth, signInWithEmailAndPassword, onAuthStateChanged } from '../firebase/index';
+import { auth, signInWithEmailAndPassword} from '../firebase/index';
 import * as yup from 'yup';
 
-const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
 
 const LoginSchema = yup.object({
     email: yup.string()
@@ -16,11 +15,11 @@ const LoginSchema = yup.object({
     .required(),
 });
 
-export default function Login({route, navigation}) {
+export default function Login({navigation}) {
     const handleLogin = (values) => {
         signInWithEmailAndPassword(auth, values.email, values.password)
-        .then((userCredential) => {
-            const user = userCredential.user;
+        .then(() => {
+            navigation.navigate('Home');
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -29,18 +28,9 @@ export default function Login({route, navigation}) {
         });
     }
 
-    useEffect(() => {
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                console.log('User has logged in with uid ', user.uid);
-                navigation.navigate('Home');
-            }
-        })
-    }, []);
-
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <View style={globalStyles.container}>
+            <ImageBackground source={require('../assets/main_BG_alt.png')} style={globalStyles.containerPrompt}>
                 <Formik
                     initialValues={{email: '', password: ''}}
                     validationSchema={LoginSchema}
@@ -50,7 +40,7 @@ export default function Login({route, navigation}) {
                 >
                 {
                     ({handleChange, handleSubmit, values, errors}) => (
-                    <ImageBackground source={{uri: imageBG}} resizeMode='cover' style={{flex: 1, padding: 20}}>
+                    <View style={{padding: 20, paddingBottom: 0}}>
                         <Text style={styles.title}>Login</Text>
                         <View style={styles.inputWrapper}>
                             <Text style={styles.label}>Email</Text>
@@ -72,10 +62,16 @@ export default function Login({route, navigation}) {
                         <TouchableOpacity style={styles.submit} onPress={handleSubmit}>
                             <Text style={{color: '#fff', fontSize: 20,}}>Login</Text>
                         </TouchableOpacity>
-                    </ImageBackground>)
+                    </View>)
                 }
                 </Formik>
-            </View>
+                <View style={{margin: 20,}}>
+                    <Text style={styles.bottomText}>Don't have an account?</Text>
+                    <TouchableOpacity onPress={() => navigation.replace('Signup')}>
+                        <Text style={styles.bottomTextBold}>Sign Up</Text>
+                    </TouchableOpacity>
+                </View>
+            </ImageBackground>
         </TouchableWithoutFeedback>
     )
 }
@@ -110,4 +106,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#D94848',
         borderRadius: 25,
     },
+    bottomText: {
+        color: '#fff', 
+        fontSize: 18, 
+        textAlign: 'center'
+    },
+    bottomTextBold: {
+        color: '#fff', 
+        fontSize: 18, 
+        textAlign: 'center',
+        fontWeight: 'bold',
+    }
 });
