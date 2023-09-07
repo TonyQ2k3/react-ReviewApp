@@ -9,3 +9,7 @@ A mobile app project, built using [React Native ⚛️](https://reactnative.dev/
 
 ## Screenshots 🎬
 
+## Installation 🛠️
+1. Run `npm install`.
+2. Run `npx expo start` to start the app.
+3. Enter `a` or `i` to run the app in an Android or iOS emulator.
