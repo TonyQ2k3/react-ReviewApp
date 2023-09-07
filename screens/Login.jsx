@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, ImageBackground } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, ImageBackground, Alert } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
 import { auth, signInWithEmailAndPassword} from '../firebase/index';
@@ -7,11 +7,12 @@ import * as yup from 'yup';
 
 
 const LoginSchema = yup.object({
-    email: yup.string()
+    email: yup.string().email()
     .label('Email')
     .required(),
     password: yup.string()
     .label('Password')
+    .min(6)
     .required(),
 });
 
@@ -22,9 +23,7 @@ export default function Login({navigation}) {
             navigation.navigate('Home');
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(`Error ${errorCode}: ${errorMessage}`);
+            Alert.alert("Login failed", "The email address or password that you've entered doesn't match any account. Please try again.");
         });
     }
 
@@ -49,6 +48,7 @@ export default function Login({navigation}) {
                                 value={values.email}
                                 onChangeText={handleChange('email')}
                             />
+                            <Text style={globalStyles.errorText}>{errors.email}</Text>
                         </View>
                         <View style={styles.inputWrapper}>
                             <Text style={styles.label}>Password</Text>
@@ -58,6 +58,7 @@ export default function Login({navigation}) {
                                 onChangeText={handleChange('password')}
                                 secureTextEntry
                             />
+                            <Text style={globalStyles.errorText}>{errors.password}</Text>
                         </View>
                         <TouchableOpacity style={styles.submit} onPress={handleSubmit}>
                             <Text style={{color: '#fff', fontSize: 20,}}>Login</Text>
