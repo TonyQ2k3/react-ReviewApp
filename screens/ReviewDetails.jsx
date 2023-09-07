@@ -5,7 +5,6 @@ import Rating from '../components/Rating';
 import Post from '../components/Post';
 import { db, collection, getDocs, getDoc, doc, auth } from '../firebase/index';
 
-const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
 
 export default function ReviewDetails( {route, navigation} ) {
     const { movieTitle, movieRating, moviePoster, movieID } = route.params;
@@ -62,7 +61,7 @@ export default function ReviewDetails( {route, navigation} ) {
     return (
         <View style={globalStyles.container}>
             <StatusBar barStyle="light-content" />
-            <ImageBackground  source={{uri: imageBG}} resizeMode='cover' style={{flex: 1, paddingBottom: 20,}}>
+            <ImageBackground  source={require('../assets/main_BG_alt.png')} resizeMode='cover' style={{flex: 1, paddingBottom: 20,}}>
                 <View style={styles.posterContainer}>
                     <Image source={{uri: moviePoster}} style={styles.posterImage} />
                     <View style={styles.titleContainer}>

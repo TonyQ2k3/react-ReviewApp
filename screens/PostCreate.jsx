@@ -6,7 +6,6 @@ import { db, collection, addDoc, setDoc, doc, getDoc } from '../firebase/index';
 import { AirbnbRating } from 'react-native-ratings';
 import * as yup from 'yup';
 
-const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
 
 const reviewSchema = yup.object({
     post: yup.string()
@@ -60,7 +59,7 @@ export default function PostCreate( {route, navigation} ) {
                 >
                 { 
                     ({handleChange, handleSubmit, values, errors}) => (
-                    <ImageBackground source={{uri: imageBG}} resizeMode='cover' style={{flex: 1, padding: 20}}>
+                    <ImageBackground source={require('../assets/main_BG_alt.png')} resizeMode='cover' style={{flex: 1, padding: 20}}>
                         {/* Rating Input */}
                         <View style={styles.ratingContainer}>
                             <AirbnbRating

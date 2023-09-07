@@ -5,7 +5,6 @@ import { Formik } from 'formik';
 import { auth, createUserWithEmailAndPassword, updateProfile } from '../firebase/index';
 import * as yup from 'yup';
 
-const imageBG = 'https://firebasestorage.googleapis.com/v0/b/moviereview-ca8ef.appspot.com/o/main_BG_alt.png?alt=media&token=16ae4c6d-9113-492b-8a3a-1e4bb57cad0a';
 
 const SignUpSchema = yup.object({
     username: yup.string()
@@ -49,7 +48,7 @@ export default function Signup({route, navigation}) {
                 >
                 {
                     ({handleChange, handleSubmit, values, errors}) => (
-                    <ImageBackground source={{uri: imageBG}} resizeMode='cover' style={{flex: 1, padding: 20}}>
+                    <ImageBackground source={require('../assets/main_BG_alt.png')} resizeMode='cover' style={{flex: 1, padding: 20}}>
                         <Text style={styles.title}>Sign up</Text>
                         <View style={styles.inputWrapper}>
                             <Text style={styles.label}>Username</Text>
