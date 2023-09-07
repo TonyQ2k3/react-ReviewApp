@@ -83,13 +83,13 @@ export default function PostCreate( {route, navigation} ) {
                                 value={values.post}
                                 onChangeText={handleChange('post')}
                                 />
-                            <Text style={styles.errorText}>{errors.post}</Text>
+                            <Text style={globalStyles.errorText}>{errors.post}</Text>
                         </View>
                         <Button title='Submit' onPress={handleSubmit} />
                     </ImageBackground>) 
                 }
                 </Formik>
-            </View>
+            </View> 
         </TouchableWithoutFeedback>
     )
 }
@@ -121,9 +121,5 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderBottomColor: '#fff',
         borderBottomWidth: 2,
-    },
-    errorText: {
-        color: '#fff',
-        fontWeight: 'bold',
     },
 });
