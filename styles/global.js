@@ -33,4 +33,8 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: '#D94848',
         borderRadius: 25,
     },
+    errorText: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
 });
