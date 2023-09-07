@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, ImageBackground } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, ImageBackground, Alert } from 'react-native';
 import { globalStyles } from '../styles/global';
 import { Formik } from 'formik';
 import { auth, createUserWithEmailAndPassword, updateProfile } from '../firebase/index';
@@ -9,17 +9,19 @@ import * as yup from 'yup';
 const SignUpSchema = yup.object({
     username: yup.string()
     .label('Username')
+    .min(5)
     .required(),
-    email: yup.string()
+    email: yup.string().email()
     .label('Email')
     .required(),
     password: yup.string()
     .label('Password')
+    .min(6)
     .required(),
 });
 
 
-export default function Signup({route, navigation}) {
+export default function Signup({navigation}) {
     const handleSignUp = (values) => {
         createUserWithEmailAndPassword(auth, values.email, values.password)
         .then((userCredential) => {
@@ -30,9 +32,7 @@ export default function Signup({route, navigation}) {
             navigation.navigate('Home');
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(`Error ${errorCode}: ${errorMessage}`);
+            Alert.alert("Registrations failed", "There's an error that's preventing you from creating the account. Please try again.");
         });
     }
 
@@ -57,6 +57,7 @@ export default function Signup({route, navigation}) {
                                 value={values.username}
                                 onChangeText={handleChange('username')}
                             />
+                            <Text style={globalStyles.errorText}>{errors.username}</Text>
                         </View>
                         <View style={styles.inputWrapper}>
                             <Text style={styles.label}>Email</Text>
@@ -65,6 +66,7 @@ export default function Signup({route, navigation}) {
                                 value={values.email}
                                 onChangeText={handleChange('email')}
                             />
+                            <Text style={globalStyles.errorText}>{errors.email}</Text>
                         </View>
                         <View style={styles.inputWrapper}>
                             <Text style={styles.label}>Password</Text>
@@ -74,6 +76,7 @@ export default function Signup({route, navigation}) {
                                 value={values.password}
                                 onChangeText={handleChange('password')}
                             />
+                            <Text style={globalStyles.errorText}>{errors.password}</Text>
                         </View>
                         <TouchableOpacity style={styles.submit} onPress={handleSubmit}>
                             <Text style={{color: '#fff', fontSize: 20,}}>Sign up</Text>
