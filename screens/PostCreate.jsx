@@ -59,7 +59,7 @@ export default function PostCreate( {route, navigation} ) {
                 >
                 { 
                     ({handleChange, handleSubmit, values, errors}) => (
-                    <ImageBackground source={require('../assets/main_BG_alt.png')} resizeMode='cover' style={{flex: 1, padding: 20}}>
+                    <ImageBackground source={require('../assets/main_BG_alt.jpg')} resizeMode='cover' style={{flex: 1, padding: 20}}>
                         {/* Rating Input */}
                         <View style={styles.ratingContainer}>
                             <AirbnbRating

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Platform } from 'react-native';
 
 export const globalStyles = StyleSheet.create({
     container: {
@@ -35,6 +36,7 @@ export const globalStyles = StyleSheet.create({
     },
     errorText: {
         color: '#fff',
+        fontSize: 12,
         fontWeight: 'bold',
     },
     form_inputWrapper: {
@@ -49,7 +51,7 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 8,
         position: 'relative',
-        top: -10,
+        top: Platform.OS === 'android' ? -8.1 : -7,
         left: 0,
         borderRadius: 5,
         height: 40,
@@ -60,7 +62,7 @@ export const globalStyles = StyleSheet.create({
         paddingVertical: 5,
         paddingHorizontal: 10,
         fontSize: 18,
-        width: 300,
+        width: Platform.OS === 'android' ? 300 : 260,
         height: 40,
         position: 'relative',
         left: -8,

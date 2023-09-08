@@ -24,7 +24,7 @@ export default function Profile({route, navigation}) {
     }
 
     return (
-        <ImageBackground source={require('../assets/main_BG_alt.png')} style={globalStyles.container}>
+        <ImageBackground source={require('../assets/main_BG_alt.jpg')} style={globalStyles.container}>
         {
             user !== null 
             ? (

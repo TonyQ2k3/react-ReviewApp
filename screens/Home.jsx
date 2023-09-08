@@ -40,7 +40,7 @@ export default function Home( {navigation} ) {
     return (
         <View style={styles.homeContainer}>
             <StatusBar barStyle="light-content" />
-            <ImageBackground source={require('../assets/main_BG_red.png')} resizeMode='cover' style={styles.imageBG}>
+            <ImageBackground source={require('../assets/main_BG_red.jpg')} resizeMode='cover' style={styles.imageBG}>
                 <FlatList
                     contentContainerStyle={styles.listContainer} 
                     data={movies}
