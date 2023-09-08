@@ -5,6 +5,9 @@ import { Formik } from 'formik';
 import { auth, signInWithEmailAndPassword} from '../firebase/index';
 import * as yup from 'yup';
 
+// Import icons
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 const LoginSchema = yup.object({
     email: yup.string().email()
@@ -22,7 +25,7 @@ export default function Login({navigation}) {
         .then(() => {
             navigation.navigate('Home');
         })
-        .catch((error) => {
+        .catch(() => {
             Alert.alert("Login failed", "The email address or password that you've entered doesn't match any account. Please try again.");
         });
     }
@@ -41,26 +44,32 @@ export default function Login({navigation}) {
                     ({handleChange, handleSubmit, values, errors}) => (
                     <View style={{padding: 20, paddingBottom: 0}}>
                         <Text style={styles.title}>Login</Text>
-                        <View style={styles.inputWrapper}>
-                            <Text style={styles.label}>Email</Text>
-                            <TextInput 
-                                style={styles.input}
-                                value={values.email}
-                                onChangeText={handleChange('email')}
-                            />
-                            <Text style={globalStyles.errorText}>{errors.email}</Text>
+                        <View style={globalStyles.form_inputWrapper}>
+                            <MaterialCommunityIcons name='email' style={globalStyles.form_label} size={24}/>
+                            <View>
+                                <TextInput
+                                    placeholder='Email' 
+                                    style={globalStyles.form_input}
+                                    value={values.email}
+                                    onChangeText={handleChange('email')}
+                                />
+                                <Text style={globalStyles.errorText}>{errors.email}</Text>
+                            </View>
                         </View>
-                        <View style={styles.inputWrapper}>
-                            <Text style={styles.label}>Password</Text>
-                            <TextInput 
-                                style={styles.input}
-                                value={values.password}
-                                onChangeText={handleChange('password')}
-                                secureTextEntry
-                            />
-                            <Text style={globalStyles.errorText}>{errors.password}</Text>
+                        <View style={globalStyles.form_inputWrapper}>
+                            <MaterialCommunityIcons name='lock' style={globalStyles.form_label} size={24}/>
+                            <View>
+                                <TextInput 
+                                    placeholder='Password'
+                                    style={globalStyles.form_input}
+                                    value={values.password}
+                                    onChangeText={handleChange('password')}
+                                    secureTextEntry
+                                />
+                                <Text style={globalStyles.errorText}>{errors.password}</Text>
+                            </View>
                         </View>
-                        <TouchableOpacity style={styles.submit} onPress={handleSubmit}>
+                        <TouchableOpacity style={globalStyles.submitBtn} onPress={handleSubmit}>
                             <Text style={{color: '#fff', fontSize: 20,}}>Login</Text>
                         </TouchableOpacity>
                     </View>)
@@ -86,18 +95,30 @@ const styles = StyleSheet.create({
     inputWrapper: {
         paddingHorizontal: 20,
         paddingVertical: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 15,
     },
     label: {
-        color: '#fff',
-        fontSize: 18,
-        marginBottom: 10,
+        color: '#D94848',
+        backgroundColor: '#fff',
+        padding: 8,
+        position: 'relative',
+        top: -10,
+        left: 0,
+        borderRadius: 5,
+        height: 40,
     },
     input: {
         backgroundColor: '#fff',
         borderRadius: 5,
         paddingVertical: 5,
         paddingHorizontal: 10,
-        fontSize: 16,
+        fontSize: 18,
+        width: 300,
+        height: 40,
+        position: 'relative',
+        left: -8,
     },
     submit: {
         margin: 20,
