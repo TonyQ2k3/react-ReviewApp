@@ -8,6 +8,18 @@ A mobile app project, built using [React Native ⚛️](https://reactnative.dev/
 + All the data is stored using Firebase.
 
 ## Screenshots 🎬
+<div >
+    <img src='./ScreensAndPosters/main_menu.png' width='200' style="margin-right: 20px" />
+    <img src='./ScreensAndPosters/log_in.png' width='200' style="margin-right: 20px"/>
+    <img src='./ScreensAndPosters/sign_up.png' width='200' style="margin-right: 20px"/>
+</div>
+<br />
+<div>
+    <img src='./ScreensAndPosters/movie_details.png' width='200' style="margin-right: 20px"/>
+    <img src='./ScreensAndPosters/create_review.png' width='200' style="margin-right: 20px"/>
+    <img src='./ScreensAndPosters/user_profile.png' width='200' style="margin-right: 20px"/>
+</div>
+
 
 ## Installation 🛠️
 1. Run `npm install`.
