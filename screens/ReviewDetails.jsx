@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         margin: 20,
+        marginTop: 5,
     },
     posterImage: {
         width: 100, 

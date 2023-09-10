@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, FlatList, Image, ImageBackground, StatusBar, RefreshControl } from 'react-native';
-import { db, collection, getDocs, auth } from '../firebase/index';
-import { globalStyles } from '../styles/global';
+import { View, StyleSheet, FlatList, ImageBackground, StatusBar, RefreshControl } from 'react-native';
+import { db, collection, getDocs } from '../firebase/index';
 import MovieCard from '../components/MovieCard';
 
 export default function Home( {navigation} ) {

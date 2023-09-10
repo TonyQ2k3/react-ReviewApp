@@ -6,8 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Import screens
+import Title from './screens/Title';
 import Home from './screens/Home';
-import About from './screens/About';
 import ReviewDetails from './screens/ReviewDetails';
 import PostCreate from './screens/PostCreate';
 import Login from './screens/Login';
@@ -26,8 +26,8 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
     'nunito-bold': require('./assets/fonts/Nunito-Bold.ttf'),
-    'playfair-regular': require('./assets/fonts/PlayfairDisplay-Regular.ttf'),
-    'playfair-medium': require('./assets/fonts/PlayfairDisplay-Medium.ttf'),
+    'raleway-regular': require('./assets/fonts/Raleway-Regular.ttf'),
+    'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
   });
 
 
@@ -44,30 +44,30 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
+      <Stack.Navigator initialRouteName='Title'>
+        <Stack.Screen name="Title" 
+          component={Title}
+          options={{
+            headerShown: false,
+          }}
+         />
         <Stack.Screen name="Home" 
           component={Home}
-          options={ ({ route, navigation }) => ({
-            title: '🎞️ FlixReview',
+          options={ ({ navigation }) => ({
+            title: 'FlixReview',
             headerTitleStyle: styles.appTitle,
-            headerTitleAlign: 'center',
-            headerRight: () => (<InfoButton type='infocirlceo' func={() => navigation.navigate('About')} />),
-            headerLeft: () => (<InfoButton type='user' func={() => navigation.navigate('Profile')} />),
-            headerBackground: (() => <HeaderBG />)
+            headerTitleAlign: 'left',
+            headerRight: () => (<InfoButton type='account' func={() => navigation.navigate('Profile')} />),
+            headerBackground: (() => <HeaderBG />),
+            headerTintColor: '#fff',
           }) }
          />
-        <Stack.Screen name='About'
-          component={About}
-          options={{
-            headerTitleStyle: styles.otherScreenTitle,
-            headerTitleAlign: 'center',
-            headerBackground: (() => <HeaderBG />)
-          }} />
         <Stack.Screen name='Details'
           component={ReviewDetails}
           options={{
+            title: '',
             headerStyle: styles.headerStyle,
-            headerTitleStyle: styles.otherScreenTitle,
+            headerTintColor: '#fff',
             animation: 'slide_from_right',
           }} />
         <Stack.Screen name='PostCreate'
@@ -76,6 +76,7 @@ export default function App() {
             title: 'Create a review',
             headerStyle: styles.headerStyle,
             headerTitleStyle: styles.otherScreenTitle,
+            headerTintColor: '#fff',
           }} />
         <Stack.Screen name='Login'
           component={Login}
@@ -83,6 +84,7 @@ export default function App() {
             title: '',
             headerStyle: styles.headerStyle,
             headerTitleStyle: styles.otherScreenTitle,
+            headerTintColor: '#fff',
           }}
         />
         <Stack.Screen name='Signup'
@@ -91,14 +93,17 @@ export default function App() {
             title: '',
             headerStyle: styles.headerStyle,
             headerTitleStyle: styles.otherScreenTitle,
+            headerTintColor: '#fff',
           }}
         />
         <Stack.Screen name='Profile'
           component={Profile}
           options={{
-            title: 'Your Profile',
+            title: 'User Profile',
+            headerTitleAlign: 'center',
             headerStyle: styles.headerStyle,
             headerTitleStyle: styles.otherScreenTitle,
+            headerTintColor: '#fff',
           }}
         />
       </Stack.Navigator>
@@ -113,7 +118,7 @@ const styles = StyleSheet.create({
   appTitle: {
     color: '#fff', 
     fontSize: 26, 
-    fontFamily: 'playfair-medium',
+    fontFamily: 'raleway-bold',
   },
   otherScreenTitle: {
     color: Appearance.getColorScheme() === 'dark' ? '#000' : '#fff',
