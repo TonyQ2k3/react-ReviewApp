@@ -2,7 +2,7 @@
 <img src='./ScreensAndPosters/title_poster.jpg' width='900'>
 <br/>
 <p align="center">
-A mobile app project, built using [React Native ⚛️](https://reactnative.dev/) and [Firebase 🔥](https://firebase.google.com/).
+A mobile app project, built using <a href="https://reactnative.dev/">React Native ⚛️</a> & <a href="https://firebase.google.com/">Firebase 🔥</a>
 </p>
 
 ## Features 🍿
@@ -13,15 +13,15 @@ A mobile app project, built using [React Native ⚛️](https://reactnative.dev/
 
 ## Screenshots 🎬
 <div >
-    <img src='./ScreensAndPosters/main_menu.png' width='250' hspace="20"/>
-    <img src='./ScreensAndPosters/log_in.png' width='250' hspace="20"/>
-    <img src='./ScreensAndPosters/sign_up.png' width='250' hspace="20"/>
+    <img src='./ScreensAndPosters/main_menu.png' width='250' hspace="10"/>
+    <img src='./ScreensAndPosters/log_in.png' width='250' hspace="10"/>
+    <img src='./ScreensAndPosters/sign_up.png' width='250' hspace="10"/>
 </div>
 <br />
 <div>
-    <img src='./ScreensAndPosters/movie_details.png' width='250' hspace="20"/>
-    <img src='./ScreensAndPosters/create_review.png' width='250' hspace="20"/>
-    <img src='./ScreensAndPosters/user_profile.png' width='250' hspace="20"/>
+    <img src='./ScreensAndPosters/movie_details.png' width='250' hspace="10"/>
+    <img src='./ScreensAndPosters/create_review.png' width='250' hspace="10"/>
+    <img src='./ScreensAndPosters/user_profile.png' width='250' hspace="10"/>
 </div>
 
 
