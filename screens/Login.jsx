@@ -32,7 +32,7 @@ export default function Login({navigation}) {
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <ImageBackground source={require('../assets/main_BG_alt.jpg')} style={globalStyles.containerPrompt}>
+            <ImageBackground source={require('../assets/main_BG.jpg')} style={globalStyles.containerPrompt}>
                 <Formik
                     initialValues={{email: '', password: ''}}
                     validationSchema={LoginSchema}

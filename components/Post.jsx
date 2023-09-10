@@ -18,7 +18,7 @@ export default function Post({user, content, rating = 0}) {
 
 const styles = StyleSheet.create({
     postContainer: {
-        backgroundColor: '#F34C56',
+        backgroundColor: '#2b2a57',
         width: 325,
         borderRadius: 10,
         padding: 15,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     user: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 16,
         maxWidth: '50%',
     },
     contentWrapper: {

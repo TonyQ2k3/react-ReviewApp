@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, FlatList, Image, ImageBackground, StatusBar, RefreshControl } from 'react-native';
 import { db, collection, getDocs, auth } from '../firebase/index';
+import { globalStyles } from '../styles/global';
+import MovieCard from '../components/MovieCard';
 
 export default function Home( {navigation} ) {
     const [refreshing, setRefreshing] = useState(false);
@@ -15,8 +17,9 @@ export default function Home( {navigation} ) {
                     movieID: doc.id,
                     movieTitle: doc.data().movieTitle,
                     moviePoster: doc.data().moviePoster,
-                    movieRating: doc.data().movieRating }
-                ]);
+                    movieRating: doc.data().movieRating, 
+                    movieYear: doc.data().movieYear,
+                }]);
                 setIDs(old => [...old, doc.data().movieID]);
             }
         });
@@ -40,16 +43,13 @@ export default function Home( {navigation} ) {
     return (
         <View style={styles.homeContainer}>
             <StatusBar barStyle="light-content" />
-            <ImageBackground source={require('../assets/main_BG_red.jpg')} resizeMode='cover' style={styles.imageBG}>
+            <ImageBackground source={require('../assets/main_BG.jpg')} resizeMode='cover' style={styles.imageBG}>
                 <FlatList
                     contentContainerStyle={styles.listContainer} 
                     data={movies}
                     keyExtractor={(item) => item.movieID}
                     renderItem={({item}) => (
-                        <TouchableOpacity style={styles.movieContainer} onPress={() => navigation.navigate('Details', item)}>
-                            <Image source={{uri: item.moviePoster}} style={styles.moviePoster} />
-                            <Text style={styles.movieTitle}>{item.movieTitle}</Text>
-                        </TouchableOpacity>
+                        <MovieCard info={item} pressHandler={() => navigation.navigate('Details', item)} />
                     )}
                     refreshControl={
                         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor='white' color='white' />

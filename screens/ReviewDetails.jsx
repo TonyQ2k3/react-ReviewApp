@@ -61,7 +61,7 @@ export default function ReviewDetails( {route, navigation} ) {
     return (
         <View style={globalStyles.container}>
             <StatusBar barStyle="light-content" />
-            <ImageBackground  source={require('../assets/main_BG_alt.jpg')} resizeMode='cover' style={{flex: 1, paddingBottom: 20,}}>
+            <ImageBackground  source={require('../assets/main_BG.jpg')} resizeMode='cover' style={{flex: 1, paddingBottom: 20,}}>
                 <View style={styles.posterContainer}>
                     <Image source={{uri: moviePoster}} style={styles.posterImage} />
                     <View style={styles.titleContainer}>

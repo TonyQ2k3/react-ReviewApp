@@ -11,7 +11,7 @@ const info = [
 export default function About() {
     return (
         <View style={globalStyles.container}>
-            <ImageBackground source={require('../assets/main_BG_alt.jpg')} resizeMode='cover' style={{flex: 1}}>
+            <ImageBackground source={require('../assets/main_BG.jpg')} resizeMode='cover' style={{flex: 1}}>
                 <ScrollView style={{flex: 1, marginBottom: 20,}}>
                     {info.map((item, index) => (
                         <Text style={globalStyles.paragraph} key={index}>{item}</Text>

@@ -31,7 +31,7 @@ export const globalStyles = StyleSheet.create({
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#D94848',
+        backgroundColor: '#282ddb',
         borderRadius: 25,
     },
     errorText: {
@@ -47,7 +47,7 @@ export const globalStyles = StyleSheet.create({
         marginTop: 10,
     },
     form_label: {
-        color: '#D94848',
+        color: '#1d1c3b',
         backgroundColor: '#fff',
         padding: 8,
         position: 'relative',
@@ -67,4 +67,32 @@ export const globalStyles = StyleSheet.create({
         position: 'relative',
         left: -8,
     },
+    movieContainer: {
+        flexDirection: 'row',
+        backgroundColor: '#1d1c3b',
+        alignItems: 'center',
+        width: 350,
+        height: 175,
+        marginBottom: 20,
+    },
+    movieInfoContainer: {
+        flex: 1,
+        padding: 10,
+    },
+    moviePoster: {
+        width: 117,
+        height: 175,
+        borderRadius: 10,
+    },
+    movieTitle: {
+        textAlign: 'center',
+        fontSize: 17,
+        fontWeight: 'bold',
+        color: '#fff'
+    },
+    movieYear: {
+        textAlign: 'center',
+        fontSize: 15,
+        color: '#fff',
+    }
 });

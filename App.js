@@ -108,7 +108,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   headerStyle: {
-    backgroundColor:  Appearance.getColorScheme() === 'dark' ? '#fff' : '#D94848', 
+    backgroundColor:  Appearance.getColorScheme() === 'dark' ? '#fff' : '#17162e', 
   },
   appTitle: {
     color: '#fff', 
